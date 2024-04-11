@@ -31,6 +31,9 @@ public class AccountService {
     private AccountRepository repository;
 
     @Autowired
+    private CurrencyConverterProxy currencyConverterProxy;
+
+    @Autowired
     private CurrencyRepository currencyRepository;
 
     @Autowired
@@ -138,7 +141,9 @@ public class AccountService {
 
     public BigDecimal convertToCurrency(BigDecimal amount, Currency from, Currency to) {
 
-        return amount;
+        BigDecimal rate = BigDecimal.valueOf(Double.parseDouble(currencyConverterProxy.getRate(from.getCode(), to.getCode())));
+
+        return amount.multiply(rate);
     }
 
     private void ensureMine(Account acc) {
