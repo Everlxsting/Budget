@@ -107,7 +107,7 @@ public class AccountServiceTest {
         accountService.deposit(acc.getId(), deposit(14.0));
         List<AccountDTO> accList = accountService.getMyAccounts();
 
-        assertEquals(accList.get(0).getCurrentValue(), BigDecimal.valueOf(14.0));
+        assertEquals(accList.get(0).getCurrentValue().compareTo(BigDecimal.valueOf(14.0)), 0);
 
         Page<TransactionDTO> txHistory = accountService.getAccountTransactions(Pageable.unpaged(), acc.getId());
         assertEquals(txHistory.getTotalElements(), 1L);
@@ -128,7 +128,7 @@ public class AccountServiceTest {
         accountService.withdraw(acc.getId(), withdraw(11.0));
         List<AccountDTO> accList = accountService.getMyAccounts();
 
-        assertEquals(accList.get(0).getCurrentValue(), BigDecimal.valueOf(9.0));
+        assertEquals(accList.get(0).getCurrentValue().compareTo(BigDecimal.valueOf(9.0)), 0);
 
         Page<TransactionDTO> txHistory = accountService.getAccountTransactions(Pageable.unpaged(), acc.getId());
         assertEquals(txHistory.getTotalElements(), 2L);
