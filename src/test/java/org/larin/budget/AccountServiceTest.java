@@ -52,6 +52,7 @@ public class AccountServiceTest {
     @Autowired
     private UserDetailsService userDetailsService;
 
+
     @Before
     @Transactional
     @Commit
@@ -79,6 +80,25 @@ public class AccountServiceTest {
         AccountNewDTO dto = new AccountNewDTO();
         dto.setCurrency(currId("RUB"));
         accountService.create(dto);
+
+        List<Account> accList = new ArrayList<>();
+        repository.findAll().forEach(accList::add);
+
+        assertFalse(accList.isEmpty());
+    }
+
+    @Test
+    @Transactional
+    @WithUserDetails("jpetrucci")
+    public void canCreateMultipleAccount() {
+        currencyService.create(currency("RUB"));
+
+        for (int i = 0; i < 200000; i++){
+            AccountNewDTO dto = new AccountNewDTO();
+            dto.setCurrency(currId("RUB"));
+            accountService.create(dto);
+        }
+
 
         List<Account> accList = new ArrayList<>();
         repository.findAll().forEach(accList::add);
