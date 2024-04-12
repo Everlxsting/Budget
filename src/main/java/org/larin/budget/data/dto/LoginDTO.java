@@ -1,7 +1,6 @@
 package org.larin.budget.data.dto;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 public class LoginDTO {
     @NotEmpty

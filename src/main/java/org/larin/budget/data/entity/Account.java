@@ -2,7 +2,12 @@ package org.larin.budget.data.entity;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 

@@ -12,8 +12,11 @@ import org.springframework.stereotype.Component;
 public class OrikaMapper extends ConfigurableMapper {
     @Override
     protected void configure(MapperFactory factory) {
-        factory.registerClassMap(factory.classMap(WithdrawalTx.class, WithdrawalTxDTO.class).byDefault().toClassMap());
-        factory.registerClassMap(factory.classMap(DepositTx.class, DepositTxDTO.class).byDefault().toClassMap());
+        factory.registerClassMap(factory.classMap(WithdrawalTx.class,
+                WithdrawalTxDTO.class).byDefault().toClassMap());
+        
+        factory.registerClassMap(factory.classMap(DepositTx.class,
+                DepositTxDTO.class).byDefault().toClassMap());
         super.configure(factory);
     }
 }

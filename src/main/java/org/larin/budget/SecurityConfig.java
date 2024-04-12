@@ -73,7 +73,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         cors.setAllowedMethods(asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
 
         // setAllowCredentials(true) is important, otherwise:
-        // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
         cors.setAllowCredentials(true);
         cors.setMaxAge(30L);
 

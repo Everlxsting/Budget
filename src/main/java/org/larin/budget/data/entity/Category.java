@@ -2,7 +2,14 @@ package org.larin.budget.data.entity;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GenerationType;
+import javax.persistence.UniqueConstraint;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity

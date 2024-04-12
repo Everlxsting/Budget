@@ -65,12 +65,14 @@ public class AuthService {
         try {
             this.repository.save(person);
         } catch (DataIntegrityViolationException e) {
-            throw new UniqueViolationException("Username " + person.getUsername() + " already exists");
+            throw new UniqueViolationException("Username " + person.getUsername()
+                    + " already exists");
         }
     }
 
     public Person getMyself() {
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Principal principal = (Principal) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
         return principal.getPerson();
     }
 }

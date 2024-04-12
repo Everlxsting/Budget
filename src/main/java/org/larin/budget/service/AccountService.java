@@ -4,6 +4,12 @@ import org.larin.budget.OrikaMapper;
 import org.larin.budget.controller.exception.ApiException;
 import org.larin.budget.controller.exception.ForbiddenException;
 import org.larin.budget.controller.exception.NotFoundException;
+import org.larin.budget.data.dto.AccountDTO;
+import org.larin.budget.data.dto.AccountNewDTO;
+import org.larin.budget.data.dto.WithdrawalTxDTO;
+import org.larin.budget.data.dto.CurrencyIdDTO;
+import org.larin.budget.data.dto.DepositTxDTO;
+import org.larin.budget.data.dto.TransactionDTO;
 import org.larin.budget.data.entity.Account;
 import org.larin.budget.data.entity.Currency;
 import org.larin.budget.data.entity.tx.DepositTx;
@@ -12,14 +18,12 @@ import org.larin.budget.data.entity.tx.WithdrawalTx;
 import org.larin.budget.data.repository.AccountRepository;
 import org.larin.budget.data.repository.CurrencyRepository;
 import org.larin.budget.data.repository.TransactionRepository;
-import org.larin.budget.data.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -110,7 +114,8 @@ public class AccountService {
 
         BigDecimal value = acc.getCurrentValue();
 
-        BigDecimal amount = convertToCurrency(transaction.getAmount(), transaction.getCurrency(), acc.getCurrency());
+        BigDecimal amount = convertToCurrency(transaction.getAmount(),
+                transaction.getCurrency(), acc.getCurrency());
 
         BigDecimal newValue = value.subtract(amount);
         acc.setCurrentValue(newValue);
@@ -141,7 +146,8 @@ public class AccountService {
 
     public BigDecimal convertToCurrency(BigDecimal amount, Currency from, Currency to) {
 
-        BigDecimal rate = BigDecimal.valueOf(Double.parseDouble(currencyConverterProxy.getRate(from.getCode(), to.getCode())));
+        BigDecimal rate = BigDecimal.valueOf(Double.parseDouble(currencyConverterProxy
+                .getRate(from.getCode(), to.getCode())));
 
         return amount.multiply(rate);
     }
